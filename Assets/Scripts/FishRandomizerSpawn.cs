@@ -10,17 +10,32 @@ public class FishRandomizerSpawn : MonoBehaviour
     public ARPlaneManager arPlaneManager;
     private List<ARPlane> detectedPlanes = new List<ARPlane>();
 
+    public float spawnInterval = 3f;
+    float timer;
+
     Vector3 randomPosition;
     ARPlane randomPlane;
 
     void Start()
     {
+        timer = spawnInterval;
         if (arPlaneManager == null)
         {
             Debug.LogError("ARPlaneManager not assigned!");
             return;
         }
         arPlaneManager.planesChanged += OnPlanesChanged;
+    }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= spawnInterval)
+        {
+            SpawnRandomObjectOnPlane();
+            timer = 0f;
+        }
     }
 
     void OnPlanesChanged(ARPlanesChangedEventArgs args)

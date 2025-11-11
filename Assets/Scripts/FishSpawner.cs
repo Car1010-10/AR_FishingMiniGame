@@ -83,27 +83,4 @@ public class FishSpawner : MonoBehaviour
         Vector3 localRandomPoint = new Vector3(randomX, 0, randomZ);
         return plane.transform.TransformPoint(localRandomPoint);
     }
-
-
-
-    /*
-    void Update ()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
-                {
-                    // Get the first hit on a plane
-                    Pose hitPose = hits[0].pose;
-
-                    // Instantiate the object at the hit position and rotation
-                    Instantiate(objectToSpawn, hitPose.position, hitPose.rotation);
-                }
-            }
-        }
-    }
-    */
 }
