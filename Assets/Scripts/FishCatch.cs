@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class FishCatch : MonoBehaviour
 {
+    public int fishScore = 5;
+    
     ARRaycastManager raycastManager;
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -40,9 +42,11 @@ public class FishCatch : MonoBehaviour
 
     public void onCollect()
     {
-        Debug.Log("Collected");
         //score logic
+        Score.score += fishScore;
         //play sound
+
+        //destroy object
         Destroy(gameObject);
     }
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class FishRandomizerSpawn : MonoBehaviour
 {
-    public GameObject[] objectPrefabs; // Array of prefabs to spawn
+    public GameObject[] fishPrefabs; // Array of prefabs to spawn
     public ARPlaneManager arPlaneManager;
     private List<ARPlane> detectedPlanes = new List<ARPlane>();
 
@@ -70,7 +70,7 @@ public class FishRandomizerSpawn : MonoBehaviour
         randomPosition = GetRandomPointOnPlane(randomPlane);
 
         // Choose a random prefab
-        GameObject prefabToSpawn = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
+        GameObject prefabToSpawn = fishPrefabs[Random.Range(0, fishPrefabs.Length)];
 
         // Instantiate the object
         Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);
