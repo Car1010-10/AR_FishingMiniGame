@@ -10,7 +10,7 @@ public class FishRandomizerSpawn : MonoBehaviour
     public ARPlaneManager arPlaneManager;
     private List<ARPlane> detectedPlanes = new List<ARPlane>();
 
-    public float spawnInterval = 3f;
+    public float spawnInterval = 5f;
     float timer;
 
     Vector3 randomPosition;

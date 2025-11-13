@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5256259369059236018}
   - component: {fileID: 3889426675507612796}
   - component: {fileID: 781876315704376348}
-  - component: {fileID: -1323394499062794670}
   m_Layer: 0
   m_Name: FishGold_Prefab
   m_TagString: Untagged
@@ -29,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2293183765633032256}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.8002784, y: 0, z: 0.4623617}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,16 +110,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1323394499062794670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2293183765633032256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 836f7d24ff5219d4ea739112f882d546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishScore: 30
