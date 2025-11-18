@@ -11,6 +11,7 @@ public class FishRandomizerSpawn : MonoBehaviour
     private List<ARPlane> detectedPlanes = new List<ARPlane>();
 
     public float spawnInterval = 5f;
+    //float randomTimer = Random.Range(3f, 10f);
     float timer;
 
     Vector3 randomPosition;
@@ -38,7 +39,7 @@ public class FishRandomizerSpawn : MonoBehaviour
         }
     }
 
-    void OnPlanesChanged(ARPlanesChangedEventArgs args)
+    public void OnPlanesChanged(ARPlanesChangedEventArgs args)
     {
         foreach (var plane in args.added)
         {

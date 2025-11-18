@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishScore: 5
+  raycastManager: {fileID: 112766898}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

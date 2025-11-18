@@ -7,7 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 public class FishSpawner : MonoBehaviour
 {
     public GameObject[] objectToSpawn; // may want to make it an array if I want to include other fish types
-    public ARPlaneManager arPlaneManager;
+    public ARPlaneManager arPlaneManager = Object.FindAnyObjectByType<ARPlaneManager>();
     List<ARPlane> detectedPlanes = new List<ARPlane>();
 
 
@@ -22,7 +22,7 @@ public class FishSpawner : MonoBehaviour
             Debug.Log("No Plane assigned!!");
             return;
         }
-        //ITrackablesChanged<ARPlane> OnPlanesChanged;
+        arPlaneManager.trackablesChanged.AddListener(OnPlanesChanged);
     }
 
   
@@ -48,6 +48,7 @@ public class FishSpawner : MonoBehaviour
         foreach (var plane in changes.removed)
         {
             // handle removed planes
+     
         }
     }
 

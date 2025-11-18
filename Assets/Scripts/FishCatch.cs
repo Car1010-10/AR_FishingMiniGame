@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using System.Collections.Generic;
 //using UnityEngine.InputSystem;
 
 
@@ -9,7 +10,7 @@ public class FishCatch : MonoBehaviour
 {
     public int fishScore = 5;
     
-    ARRaycastManager raycastManager;
+    [SerializeField] ARRaycastManager raycastManager;
  
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -32,19 +33,12 @@ public class FishCatch : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                RaycastHit objHit;
-                if (raycastManager.Raycast(ray, hits, TrackableType.Planes))
+                if (raycastManager.Raycast(touch.position, hits, TrackableType.Planes))
                 {
-                    if (Physics.Raycast(ray, out objHit))
-                    {
-                        if (Physics.Raycast(ray, out objHit))
-                        {
-
-                            onCollect();
-
-                        }
-                    }
+                   
+                    onCollect();
+                        
+                    
                 }
             }
         }
@@ -83,5 +77,31 @@ public class FishCatch : MonoBehaviour
             }
         }
         */
+    }
+
+    void looktwo()
+    {
+      
+        /*
+            if (Input.touchCount == 0)
+                return;
+            Touch touch = Input.GetTouch(0);
+
+            if (raycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
+            {
+                // Raycast hits are sorted by distance, so the first one
+                // will be the closest hit.
+                var hitPose = s_Hits[0].pose;
+                if (spawnedObject == null)
+                {
+                    spawnedObject = Instantiate(cube, hitPose.position, hitPose.rotation);
+                }
+                else
+                {
+                    spawnedObject.transform.position = hitPose.position;
+                }
+            }
+        */
+        
     }
 }
