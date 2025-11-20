@@ -1,0 +1,94 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
+
+public class FishSpawner : MonoBehaviour
+{
+    public GameObject[] objectToSpawn;
+    public ARPlaneManager arPlaneManager;
+    List<ARPlane> detectedPlanes = new List<ARPlane>();
+
+    public float spawnInterval;
+    float timer;
+
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        timer = spawnInterval;
+        if (arPlaneManager == null)
+        {
+            Debug.Log("No Plane assigned!!");
+            return;
+        }
+        arPlaneManager = Object.FindAnyObjectByType<ARPlaneManager>();
+        arPlaneManager.trackablesChanged.AddListener(OnPlanesChanged);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= spawnInterval)
+        {
+            SpawnRandomObjectOnPlane();
+            timer = 0f;
+        }
+    }
+
+    public void OnPlanesChanged(ARTrackablesChangedEventArgs<ARPlane> changes)
+    {
+        foreach (var plane in changes.added)
+        {
+            detectedPlanes.Add(plane);
+        }
+
+        foreach (var plane in changes.updated)
+        {
+            // handle updated planes
+        }
+
+        foreach (var plane in changes.removed)
+        {
+            // handle removed planes
+            // won't let me remove planes manually...
+        }
+    }
+
+    // Will eventually call this function to summon fishes, maybe through a timmer or button
+    public void SpawnRandomObjectOnPlane()
+    {
+        if (detectedPlanes.Count == 0)
+        {
+            Debug.Log("No Planes detected");
+            return;
+        }
+
+        // Chooses a random plane
+        ARPlane randomPlane = detectedPlanes[Random.Range(0, detectedPlanes.Count)];
+
+        // this right here may be subject to change
+        Vector3 randomPosition = GetRandomPointonPlane(randomPlane);
+
+        GameObject prefabToSpawn = objectToSpawn[Random.Range(0, objectToSpawn.Length)];
+
+        Instantiate(prefabToSpawn, randomPosition, Quaternion.identity); 
+    }
+
+    Vector3 GetRandomPointonPlane(ARPlane plane)
+    {
+        Vector3 center = plane.center;
+        Vector3 extents = plane.extents;
+
+        float randomX = Random.Range(-extents.x, extents.x);
+        float randomZ = Random.Range(-extents.z, extents.z); // Using Z for the plane's depth
+
+        // Convert local coordinates to world coordinates relative to the plane's transform
+        Vector3 localRandomPoint = new Vector3(randomX, 0, randomZ);
+        return plane.transform.TransformPoint(localRandomPoint);
+    }
+}
