@@ -1,27 +1,21 @@
 using UnityEngine;
 
-
-
 public class FishCatch : MonoBehaviour
 {
     public int fishScore = 5;
+    public float lifeTime = 3f;
 
-  
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      
+        Destroy(gameObject, lifeTime);
     }
 
-
-    //Won't Work
-
-    // Update is called once per frame
     void Update()
     {
+
     }
 
-    public void onCollect()
+    public void OnCollect()
     {
         //score logic
         Score.score += fishScore;
@@ -29,7 +23,5 @@ public class FishCatch : MonoBehaviour
 
         //destroy object
         Destroy(gameObject);
-    }
-
-   
+    }   
 }
