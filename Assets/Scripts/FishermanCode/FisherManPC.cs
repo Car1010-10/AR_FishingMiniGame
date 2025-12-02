@@ -9,8 +9,6 @@ public class FisherManPC : MonoBehaviour
     public GameObject HookMarkerPrefab;
     public FishLineControl fishLineController;
 
-    bool Fish = false;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,30 +18,29 @@ public class FisherManPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GetInput();
+        //enable touch input
         Touchscreen screen = Touchscreen.current;
         if (screen != null)
         {
             if (screen.IsPressed())
             {
-                OnFish(ScreenWorld.Instance.WorldLocation);
+                PerformRaycast(); //ScreenWorld.Instance.WorldLocation
             }
         }
     }
 
-    void OnFish(Vector3 location)
+    void OnFish() //Vector3 location
     {
         PerformRaycast();
     }
 
     void PerformRaycast()
     {
+        //performs a raycast to fish and hit the fish prefab to add to your score
         RaycastHit hit;
         bool hasHit = Physics.Raycast(fishingRod.transform.position, fishingRod.transform.forward, out hit, RayCastDistance);
         if (hasHit)
         {
-            Debug.Log("Found " + hit.collider.gameObject.name);
-
             fishLineController.ShowFishLine(hit.distance);
             Instantiate(HookMarkerPrefab, hit.point, Quaternion.Euler(hit.normal));
 
