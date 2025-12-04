@@ -9,10 +9,14 @@ public class FisherManPC : MonoBehaviour
     public GameObject HookMarkerPrefab;
     public FishLineControl fishLineController;
 
+    public AudioClip Reel;
+    AudioSource source;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        source = gameObject.AddComponent<AudioSource>();
+        source.spatialBlend = 1;
     }
 
     // Update is called once per frame
@@ -24,6 +28,7 @@ public class FisherManPC : MonoBehaviour
         {
             if (screen.IsPressed())
             {
+                source.PlayOneShot(Reel);
                 PerformRaycast(); //ScreenWorld.Instance.WorldLocation
             }
         }
